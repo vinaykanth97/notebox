@@ -9,10 +9,10 @@ export default function DisplayNotes() {
     return (
         <div className="fixed-grid infowrap">
             <div className='grid has-2-cols eq-height'>
-                {todoNotes?.map((todo) => {
+                {todoNotes?.map((todo, i) => {
                     return (
                         <>
-                            {todo.isType === "normalnote" ? <RegularNotes todoData={todo} /> : <CheckBoxNote todoData={todo} />}
+                            {todo.isType === "normalnote" ? <RegularNotes todoData={todo} key={i}/> : <CheckBoxNote todoData={todo} key={i}/>}
                         </>
                     )
                 })}

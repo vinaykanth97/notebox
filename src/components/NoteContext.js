@@ -6,6 +6,7 @@ export const NoteContextProvider = ({ children }) => {
     const reducer = (state, action) => {
         switch (action.type) {
             case "ADDTASK":
+                // console.log(state)
                 return [action.payload, ...state];
             case "REMOVENOTE":
                 return state.filter(data => data.id !== action.payload.dataId)
@@ -17,11 +18,12 @@ export const NoteContextProvider = ({ children }) => {
                             ...todoData,
                             list: [...todoData.list, {
                                 listTitle: '',
-                                id: uuidv4(),
+                                listId: uuidv4(),
                                 isCompleted: false
                             }]
                         }
                     }
+
                     return todoData
                 })
                 return addCheckBoxNote
@@ -29,18 +31,17 @@ export const NoteContextProvider = ({ children }) => {
             case "UPDATECHECKBOXLIST":
                 let updateCheckBoxNote = state.map(todoData => {
                     if (todoData.id === action.payload.id) {
-                        console.log(todoData)
+
                         return {
                             ...todoData, list: [...todoData.list.map(todo => {
-                                if (todo.id === action.payload.listId) {
-
+                                if (todo.listId === action.payload.listId) {
+                                    // console.log(todo)
                                     return {
                                         ...todo,
                                         listTitle: action.payload.listTitle,
                                         isCompleted: action.payload.isCompleted
                                     }
                                 }
-
                                 return todo
                             })]
                         }
@@ -50,9 +51,17 @@ export const NoteContextProvider = ({ children }) => {
                 })
                 return updateCheckBoxNote
             case "REMOVECHECKBOXLIST":
-                return state.map(todoData => todoData.id === action.payload.id && {
-                    ...todoData, list: [...todoData.list.filter(list => list.id !== action.payload.listId)]
+                let removedList = state.map(todoData => {
+                    if (todoData.id === action.payload.id) {
+                        return {
+                            ...todoData, list: [...todoData.list.filter(list => {
+                                return action.payload.listId !== list.listId
+                            })]
+                        }
+                    }
+                    return todoData
                 })
+                return removedList
             default:
                 return state;
         }

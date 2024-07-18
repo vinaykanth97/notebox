@@ -8,7 +8,7 @@ import { NoteContextProvider } from "./components/NoteContext"
 export default function App() {
     return (
         <NoteContextProvider>
-            <div class="notewrap">
+            <div className="notewrap">
                 <NoteTypes />
                 <DisplayNotes />
             </div>

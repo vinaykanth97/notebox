@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import CardOutline from './CardOutline'
 import { NoteContext } from './NoteContext'
 
@@ -15,6 +15,7 @@ export default function CheckBoxNote({ todoData }) {
     })
   }
   const RemoveTaskList = (e, id, listId) => {
+    // console.log(todoData)
     dispatch({
       type: 'REMOVECHECKBOXLIST',
       payload: {
@@ -23,45 +24,45 @@ export default function CheckBoxNote({ todoData }) {
       }
     })
   }
-  const UpdateListHandler = (e, id, listId) => {
-    e.preventDefault()
-    console.log(e.target.checked)
+  const UpdateListHandler = (e, id, list) => {
     dispatch({
       type: 'UPDATECHECKBOXLIST',
       payload: {
         id,
-        listId,
-        [e.target.name]: e.target.value,
-        // isCompleted: e.target.checked
+        ...list,
+        [e.target.name]: e.target.name === "isCompleted" ? e.target.checked : e.target.value
       }
     })
   }
-  const InputCheckHandler = (e) => {
-    // console.log(e.target.checked)
-  }
+
+useEffect(() => {
+  console.log(todoData.list)
+}, [todoData])
+
   return (
     <CardOutline todoData={todoData}>
-      <div class="card-content">
-        <div class="content">
+      <div className="card-content">
+        <div className="content">
           {todoData.list.length <= 0 ? <p>Add tasks to display</p> : todoData.list?.map((lis, index) => {
+            // console.log(lis)
             return (
-              <form className="checknote-wrap" onInput={(e) => UpdateListHandler(e, todoData.id, lis.id)}>
-                <input className='list-title' name="listTitle" defaultValue={lis.listTitle} placeholder='Task Name' />
+              <div className="checknote-wrap" key={index}>
+                <input className={`list-title ${lis.isCompleted ? 'strike' : ''}`} name="listTitle" placeholder='Task Name' onInput={(e) => UpdateListHandler(e, todoData.id, lis)} value={lis.listTitle} />
                 <div className="actions">
-                  <label class="checkbox">
-                    <input type="checkbox" name='isCompleted' value={lis.isCompleted} onInput={InputCheckHandler} />
+                  <label className="checkbox">
+                    <input type="checkbox" name='isCompleted' defaultChecked={!!lis.isCompleted} onInput={(e) => UpdateListHandler(e, todoData.id, lis)} />
                   </label>
-                  <div className="close" onClick={(e) => RemoveTaskList(e, todoData.id, lis.id)}>&#10006;</div>
+                  <div className="close" onClick={(e) => RemoveTaskList(e, todoData.id, lis.listId)}>&#10006;</div>
                 </div>
-              </form>
+              </div>
             )
 
           })}
 
         </div>
       </div>
-      <footer class="card-footer">
-        <button class="button is-small" onClick={(e) => AddTaskHandler(e, todoData)}>Add Task</button>
+      <footer className="card-footer">
+        <button className="button is-small" onClick={(e) => AddTaskHandler(e, todoData)}>Add Task</button>
       </footer>
     </CardOutline>
   )

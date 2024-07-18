@@ -12,11 +12,11 @@ export default function CardOutline({ children, todoData }) {
         })
     }
     return (
-        <div class="card ">
-            <header class="card-header">
-                <p class="card-header-title">Title</p>
-                <button class="card-header-icon" aria-label="more options" onClick={RemoveNote}>
-                    <span class="icon">
+        <div className="card ">
+            <header className="card-header">
+                <p className="card-header-title">Title</p>
+                <button className="card-header-icon" aria-label="more options" onClick={RemoveNote}>
+                    <span className="icon">
                         &#x2715;
                     </span>
                 </button>

@@ -59,9 +59,11 @@ body {
     align-items: flex-start;
     gap: 20px;
 }
-.checknote-wrap p{
+
+.checknote-wrap p {
     flex: 2;
 }
+
 .checknote-wrap label span {
     margin: 0 0 0 10px;
 }
@@ -77,14 +79,21 @@ body {
 .card-footer {
     padding: 15px;
 }
-.textarea{
+
+.textarea {
     resize: none;
 }
-.close{
+
+.close {
     cursor: pointer;
 }
-.actions{
+
+.actions {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.strike {
+    text-decoration: line-through;
 }
