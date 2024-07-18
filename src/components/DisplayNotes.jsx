@@ -12,7 +12,7 @@ export default function DisplayNotes() {
                 {todoNotes?.map((todo, i) => {
                     return (
                         <>
-                            {todo.isType === "normalnote" ? <RegularNotes todoData={todo} key={i}/> : <CheckBoxNote todoData={todo} key={i}/>}
+                            {todo.isType === "normalnote" ? <RegularNotes todoData={todo} key={i} /> : <CheckBoxNote todoData={todo} key={i} />}
                         </>
                     )
                 })}

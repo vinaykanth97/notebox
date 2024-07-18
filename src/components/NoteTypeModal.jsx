@@ -10,14 +10,14 @@ export default function NoteTypeModal() {
     const CreateNormalNote = () => {
         dispatch({
             type: "ADDTASK", payload: {
-                id: uuidv4(), isType: 'normalnote'
+                id: uuidv4(), isType: 'normalnote', title: ''
             }
         })
     }
     const CreateCheckBoxNote = () => {
         dispatch({
             type: "ADDTASK", payload: {
-                id: uuidv4(), isType: 'checkboxnote', list: []
+                id: uuidv4(), isType: 'checkboxnote', list: [], title: ''
             }
         })
     }

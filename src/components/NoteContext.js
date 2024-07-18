@@ -11,22 +11,31 @@ export const NoteContextProvider = ({ children }) => {
             case "REMOVENOTE":
                 return state.filter(data => data.id !== action.payload.dataId)
 
+            case "UPDATENOTEOUTLINE":
+                let updateNoteState = state.map((todoData) => {
+                    if (todoData.id === action.payload.id) {
+                        return {
+                            ...action.payload
+                        }
+                    }
+                    return todoData
+                })
+                return updateNoteState
+
+
+
             case "ADDCHECKBOXLIST":
                 let addCheckBoxNote = state.map(todoData => {
                     if (todoData.id === action.payload.id) {
                         return {
-                            ...todoData,
-                            list: [...todoData.list, {
-                                listTitle: '',
-                                listId: uuidv4(),
-                                isCompleted: false
-                            }]
+                            ...action.payload,
                         }
                     }
-
                     return todoData
                 })
                 return addCheckBoxNote
+
+
 
             case "UPDATECHECKBOXLIST":
                 let updateCheckBoxNote = state.map(todoData => {
@@ -35,11 +44,8 @@ export const NoteContextProvider = ({ children }) => {
                         return {
                             ...todoData, list: [...todoData.list.map(todo => {
                                 if (todo.listId === action.payload.listId) {
-                                    // console.log(todo)
                                     return {
-                                        ...todo,
-                                        listTitle: action.payload.listTitle,
-                                        isCompleted: action.payload.isCompleted
+                                        ...action.payload
                                     }
                                 }
                                 return todo

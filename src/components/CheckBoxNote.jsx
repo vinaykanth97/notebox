@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import CardOutline from './CardOutline'
 import { NoteContext } from './NoteContext'
-
+import { v4 as uuidv4 } from 'uuid'
 
 export default function CheckBoxNote({ todoData }) {
   const contextItems = useContext(NoteContext)
@@ -11,6 +11,11 @@ export default function CheckBoxNote({ todoData }) {
       type: 'ADDCHECKBOXLIST',
       payload: {
         ...todoData,
+        list: [...todoData.list, {
+          listTitle: '',
+          listId: uuidv4(),
+          isCompleted: false
+        }]
       }
     })
   }
@@ -35,9 +40,9 @@ export default function CheckBoxNote({ todoData }) {
     })
   }
 
-useEffect(() => {
-  console.log(todoData.list)
-}, [todoData])
+  useEffect(() => {
+    // console.log(todoData)
+  }, [todoData])
 
   return (
     <CardOutline todoData={todoData}>
@@ -47,10 +52,10 @@ useEffect(() => {
             // console.log(lis)
             return (
               <div className="checknote-wrap" key={index}>
-                <input className={`list-title ${lis.isCompleted ? 'strike' : ''}`} name="listTitle" placeholder='Task Name' onInput={(e) => UpdateListHandler(e, todoData.id, lis)} value={lis.listTitle} />
+                <input type='text' className={`is-small input list-title ${lis.isCompleted ? 'strike' : ''}`} name="listTitle" placeholder='Task Name' onInput={(e) => UpdateListHandler(e, todoData.id, lis)} value={lis.listTitle} />
                 <div className="actions">
                   <label className="checkbox">
-                    <input type="checkbox" name='isCompleted' defaultChecked={!!lis.isCompleted} onInput={(e) => UpdateListHandler(e, todoData.id, lis)} />
+                    <input type="checkbox" name='isCompleted' key={lis.isCompleted} defaultChecked={lis.isCompleted} onInput={(e) => UpdateListHandler(e, todoData.id, lis)} />
                   </label>
                   <div className="close" onClick={(e) => RemoveTaskList(e, todoData.id, lis.listId)}>&#10006;</div>
                 </div>
