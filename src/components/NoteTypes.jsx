@@ -8,9 +8,8 @@ export default function NoteTypes() {
         popupContext.setPopup(true)
     }
     return (
-        <div className='notetype'>
+        <div className='notetype has-text-right'>
             <button className="button" onClick={TaskModalHandler}>Add Task</button>
-            <NoteTypeModal />
         </div>
     )
 }

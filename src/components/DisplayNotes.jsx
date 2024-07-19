@@ -7,13 +7,13 @@ export default function DisplayNotes() {
     const contextItems = useContext(NoteContext)
     const { todoNotes } = contextItems
     return (
-        <div className="fixed-grid infowrap">
-            <div className='grid has-2-cols eq-height'>
+        <div className="fixed-grid infowrap has-4-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+            <div className='grid '>
                 {todoNotes?.map((todo, i) => {
                     return (
-                        <>
+                        <div key={i} className='col'>
                             {todo.isType === "normalnote" ? <RegularNotes todoData={todo} key={i} /> : <CheckBoxNote todoData={todo} key={i} />}
-                        </>
+                        </div>
                     )
                 })}
 

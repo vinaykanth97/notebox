@@ -6,7 +6,6 @@ export const NoteContextProvider = ({ children }) => {
     const reducer = (state, action) => {
         switch (action.type) {
             case "ADDTASK":
-                // console.log(state)
                 return [action.payload, ...state];
             case "REMOVENOTE":
                 return state.filter(data => data.id !== action.payload.dataId)
@@ -72,7 +71,12 @@ export const NoteContextProvider = ({ children }) => {
                 return state;
         }
     }
-    const [todoNotes, dispatch] = useReducer(reducer, []);
+
+
+    if (localStorage.getItem('Notes') === "" || localStorage.getItem('Notes') === null) {
+        localStorage.setItem('Notes', JSON.stringify([]))
+    }
+    const [todoNotes, dispatch] = useReducer(reducer, JSON.parse(localStorage.getItem('Notes')));
     const [popup, setPopup] = useState(false)
     return (
         <NoteContext.Provider value={

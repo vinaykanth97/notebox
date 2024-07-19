@@ -1,33 +1,31 @@
 html {
-    overflow: hidden;
+    overflow: auto;
+
 }
 
 body {
     background: url(./images/stars.jpg) no-repeat;
     background-size: cover;
+    min-height: 100vh;
 }
 
 .notewrap {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    /* gap: 30px; */
 }
 
-.notetype {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.15);
+header.header {
+    padding: 10px 0;
+    background: rgba(202, 201, 201, 0.171);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: sticky;
+    top: 0;
+    z-index: 22;
 }
 
-.d-block {
-    display: block;
+.d-flex {
+    display: flex;
 }
 
 .modal-content {
@@ -48,8 +46,6 @@ body {
 }
 
 .infowrap {
-    height: 100vh;
-    overflow: auto;
     padding: 20px;
 }
 
@@ -69,9 +65,7 @@ body {
     margin: 0 0 0 10px;
 }
 
-.eq-height {
-    align-items: flex-start;
-}
+
 
 .card {
     margin-bottom: 0 !important;
@@ -105,12 +99,36 @@ body {
     border: none;
     border: 1px solid #ccc;
     color: var(--bulma-body-color);
-    
+
 }
-.checknote-wrap .editable-input{
+
+.checknote-wrap .editable-input {
     width: 100%;
 }
-.card-content{
+
+.card-content {
     max-height: 180px;
     overflow: auto;
+}
+
+.card-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+    background-color: rgb(32, 30, 30);
+    outline: 1px solid rgb(64, 68, 71);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.card-header-icon {
+    padding: 4px;
+}
+
+.modal-close {
+    top: 50%;
+    transform: translateY(-50%);
 }
