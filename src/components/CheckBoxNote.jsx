@@ -46,24 +46,28 @@ export default function CheckBoxNote({ todoData }) {
       <div className="card-content">
         <div className="content">
           <h5>Todo List</h5>
-          {todoData.list.length <= 0 ? <p>Add tasks to display</p> : todoData.list?.map((lis, index) => {
-            // console.log(lis)
-            return (
-              <div className="checknote-wrap" key={index}>
-                <input type='text' className={`is-small input list-title ${lis.isCompleted ? 'strike' : ''}`} name="listTitle" placeholder='Task Name' onInput={(e) => UpdateListHandler(e, todoData.id, lis)} value={lis.listTitle} />
-                {lis.listTitle !== "" && (
-                  <div className="actions">
-                    <label className="checkbox">
-                      <input type="checkbox" name='isCompleted' key={lis.isCompleted} defaultChecked={lis.isCompleted} onInput={(e) => UpdateListHandler(e, todoData.id, lis)} />
-                    </label>
-                    <div className="close" onClick={(e) => RemoveTaskList(e, todoData.id, lis.listId)}>&#10006;</div>
-                  </div>
-                )}
+          <div className='mini-list-wrap'>
+            {todoData.list.length <= 0 ? <p>Add tasks to display</p> : todoData.list?.map((lis, index) => {
+              // console.log(lis)
 
-              </div>
-            )
+              return (
+                <div className="checknote-wrap" key={index}>
+                  <input type='text' className={`is-small input list-title ${lis.isCompleted ? 'strike' : ''}`} name="listTitle" placeholder='Task Name' onInput={(e) => UpdateListHandler(e, todoData.id, lis)} value={lis.listTitle} />
+                  {lis.listTitle !== "" && (
+                    <div className="actions">
+                      <label className="checkbox">
+                        <input type="checkbox" name='isCompleted' key={lis.isCompleted} defaultChecked={lis.isCompleted} onInput={(e) => UpdateListHandler(e, todoData.id, lis)} />
+                      </label>
+                      <div className="close" onClick={(e) => RemoveTaskList(e, todoData.id, lis.listId)}>&#10006;</div>
+                    </div>
+                  )}
 
-          })}
+                </div>
+              )
+
+            })}
+          </div>
+
 
         </div>
       </div>

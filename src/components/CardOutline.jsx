@@ -22,7 +22,7 @@ export default function CardOutline({ children, todoData, todoNotes }) {
     }
     return (
         <div className="card ">
-            <div className='level-right'>
+            <div className='level-right is-mobile level'>
                 <button className="card-header-icon" aria-label="more options" onClick={RemoveNote}>
                     <span className="icon">
                         &#x2715;
